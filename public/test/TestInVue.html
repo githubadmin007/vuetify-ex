@@ -1,0 +1,39 @@
+<html>
+
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+    <link href="../../lib/VuetifyEx.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+    <script src="../../lib/VuetifyEx.umd.js"></script>
+</head>
+
+<body>
+    <v-app id="app">
+        <v-btn @click="openWindow">打开</v-btn>
+    </v-app>
+    <script>
+        var VueApp = new Vue({
+            el: "#app",
+            vuetify: new Vuetify(),
+            data() {
+                return {}
+            },
+            methods: {
+                openWindow() {
+                    this.$VWindow({
+                        src: 'http://www.baidu.com',
+                        width: '80%',
+                        moveAble: true,
+                        minimize: true,
+                        maximize: true
+                    });
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

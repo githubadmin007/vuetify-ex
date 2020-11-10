@@ -1,0 +1,37 @@
+[
+    {
+        "path": "/ReadMe",
+        "name": "安装说明",
+        "component": "ReadMe"
+    },
+    {
+        "path": "/UpdateLog",
+        "name": "更新日志",
+        "component": "UpdateLog"
+    },
+    {
+        "path": "/VContextMenu",
+        "name": "右键菜单(VContextMenu)",
+        "component": "VContextMenu"
+    },
+    {
+        "path": "/VMessage",
+        "name": "消息提示(VMessage)",
+        "component": "VMessage"
+    },
+    {
+        "path": "/VNestList",
+        "name": "嵌套列表(VNestList)",
+        "component": "VNestList"
+    },
+    {
+        "path": "/VPopupWindow",
+        "name": "弹窗(VPopupWindow)",
+        "component": "VPopupWindow"
+    },
+    {
+        "path": "/VTest",
+        "name": "测试组件",
+        "component": "VTest"
+    }
+]
