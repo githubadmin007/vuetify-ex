@@ -1,7 +1,7 @@
 import { VNode } from 'vue/types/umd';
 import VMessage from './VMessage.vue';
 
-interface MessageOptions {
+export interface MessageOptions {
     id?: string;
     type?: string;
     message: string | VNode;

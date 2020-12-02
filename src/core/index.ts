@@ -28,13 +28,6 @@ VuetifyEx.install = (Vue, args) => {
     Vue.prototype.$VMessage = VMessageHelper;
 }
 
-declare global {
-    interface Window {
-        $VWindow: Function;
-        $VMessage: Function;
-    }
-}  
-
 if (typeof window !== 'undefined'  && window.Vue) {
     window.Vue.use(VuetifyEx)
     window.$VWindow = VWindowManager;

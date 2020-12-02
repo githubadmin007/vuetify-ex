@@ -3,6 +3,12 @@ vuetify-ex
 更新日志
 ---
 
+### v0.3.1
+时间：*2020-12-02*
+- 将`VMessageHelper`组件中的`MessageOptions`接口暴露出来
+- 将package.json的main改为"./src/core/index.ts"
+- 添加了"./types/index.d.ts"文件
+
 ### v0.3.0
 时间：*2020-12-02*
 - 添加`VDateTime`组件  

@@ -1,6 +1,6 @@
 import PopupWindow from './VPopupWindow.vue';
 
-interface WindowOptions {
+export interface WindowOptions {
     id?: string;
     title?: string;
     src?: string;
