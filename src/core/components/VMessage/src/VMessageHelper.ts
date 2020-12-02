@@ -1,13 +1,7 @@
 import { VNode } from 'vue/types/umd';
 import VMessage from './VMessage.vue';
+import { MessageOptions } from '../../../../../types'
 
-export interface MessageOptions {
-    id?: string;
-    type?: string;
-    message: string | VNode;
-    onClose?: Function;
-    offset?: number;
-}
 
 const instances: any[] = [];
 let seed = 1;

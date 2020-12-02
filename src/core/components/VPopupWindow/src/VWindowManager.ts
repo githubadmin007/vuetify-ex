@@ -1,15 +1,11 @@
+import Vue from 'vue'
 import PopupWindow from './VPopupWindow.vue';
-
-export interface WindowOptions {
-    id?: string;
-    title?: string;
-    src?: string;
-}
+import { WindowOptions } from '../../../../../types'
 
 const instances: any[] = [];
 let seed = 1;
 
-function VWindowManager(this: any, options: WindowOptions | string): string {
+function VWindowManager(this: Vue, options: WindowOptions | string): string {
     const _options: WindowOptions = typeof options === 'string' ? { src: options } : options;
     const id = (typeof options === 'string' ? undefined : options.id) || 'window_' + seed++;
     _options.id = id;
@@ -48,7 +44,6 @@ VWindowManager.close = function (id: string | void): void {
 VWindowManager.closeAll = function (): void {
     for (let i = instances.length - 1; i >= 0; i--) {
         instances[i].Close();
-        // close();
     }
 }
 
