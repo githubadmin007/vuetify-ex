@@ -49,7 +49,7 @@ const color: any = {
 @Component({
     name: "VMessage",
 })
-export default class VPopupWindow extends Vue {
+export default class VMessage extends Vue {
     visible = false;
     message = ""; // 消息文字
     duration = 2000; // 显示时间, 毫秒。设为 0 则不会自动关闭

@@ -29,7 +29,7 @@ Vue.use(VuetifyEx)
 ### 新增组件步骤
 1. 在src/core/components目录下创建新组件文件夹，名称建议`以V开头、单词首字母大写`  
 2. 在新组件文件夹下创建src文件夹及index.ts文件，内容参考其他已存在的组件  
-3. 功能开发完毕后，将新组件`按组件名排序`添加到src/core/index.ts中，内容为：export * from './新组件名称'  
+3. 功能开发完毕后，将新组件`按组件名排序`添加到src/core/components/index.ts中，内容为：export * from './新组件名称'  
 4. 至此组件功能开发完毕，接下来是编写文档  
 5. 在src/docs/components目录下新建`组件名.md`文件  
 6. 在md文件内编写组件说明文档，支持常用md语法，具体内容可参考其他组件文档  

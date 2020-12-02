@@ -23,7 +23,7 @@ import NestList from "../../VNestList/src/VNestList.vue";
         NestList,
     },
 })
-export default class VNestList extends Vue {
+export default class VContextMenu extends Vue {
     Visible = false; // 菜单是否可见
     data: any = null; // 附加数据
     NestListCfg: any = null; // NestList配置

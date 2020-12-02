@@ -1,7 +1,7 @@
 {
   "name": "vuetify-ex",
   "descroption": "一个依赖于Vuetify的前端Vue组件库，作为对Vuetify组件库的补充。",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "author": "fssg/zjh",
   "license": "MIT",
   "private": false,
