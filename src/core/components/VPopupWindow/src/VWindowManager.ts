@@ -5,10 +5,27 @@ import { WindowOptions } from '../../../../../types'
 const instances: any[] = [];
 let seed = 1;
 
+/** 销毁实例 */
+function destroyInstance(id: string | void) {
+    const index = id ? instances.findIndex(instance => instance.id === id) : instances.length - 1;
+    if (index > -1) {
+        const instance = instances[index];
+        instance.$destroy();
+        instance.parent && instance.parent.removeChild ? instance.parent.removeChild(instance.$el) : document.body.removeChild(instance.$el);
+        instances.splice(index, 1);
+    }
+}
+
 function VWindowManager(this: Vue, options: WindowOptions | string): string {
     const _options: WindowOptions = typeof options === 'string' ? { src: options } : options;
     const id = (typeof options === 'string' ? undefined : options.id) || 'window_' + seed++;
     _options.id = id;
+    // 在
+    const afterClose = _options.afterClose;
+    _options.afterClose = (data: any) => {
+        if (afterClose) afterClose(data);
+        destroyInstance(id);
+    };
     // 删除可能存在的同id对象
     VWindowManager.close(id);
     // 实例化一个新对象
@@ -20,11 +37,11 @@ function VWindowManager(this: Vue, options: WindowOptions | string): string {
     instance.parent = this ? this.$el : this;
     this && this.$el ? this.$el.appendChild(instance.$el) : document.body.appendChild(instance.$el);
     instance.Show();
-    const close = instance.Close;
-    instance.Close = () => close(() => VWindowManager.close(id));
     instances.push(instance);
     return id;
 }
+
+
 
 // z-index初始值
 VWindowManager.zIndexBase = 1000;
@@ -34,16 +51,14 @@ VWindowManager.close = function (id: string | void): void {
     const index = id ? instances.findIndex(instance => instance.id === id) : instances.length - 1;
     if (index > -1) {
         const instance = instances[index];
-        instance.$destroy();
-        instance.parent && instance.parent.removeChild ? instance.parent.removeChild(instance.$el) : document.body.removeChild(instance.$el);
-        instances.splice(index, 1);
+        instance.Close();
     }
 }
 
 // 关闭所有窗口
 VWindowManager.closeAll = function (): void {
     for (let i = instances.length - 1; i >= 0; i--) {
-        instances[i].Close();
+        VWindowManager.close(instances[i].id);
     }
 }
 

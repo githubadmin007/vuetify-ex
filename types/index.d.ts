@@ -52,5 +52,6 @@ export interface WindowOptions {
     shadeClose?: boolean;
     shadeEvent?: boolean;
     beforeClose?: Function;
+    afterClose?: Function;
     elevation?: number;
 }

@@ -130,6 +130,12 @@
         <br/>
         传入一个组件及组件参数
         <v-btn @click="openComp">弹出组件</v-btn>
+        <br/>
+        关闭全部
+        <v-btn @click="CloseAll">关闭全部</v-btn>
+        <br/>
+        查看实例数
+        <v-btn @click="ShowCount">查看实例数</v-btn>
     </v-sheet>
 </template>
 
@@ -151,8 +157,19 @@
                     minimize: true,
                     maximize: true,
                     shade: 0.5,
-                    shadeClose: true,
-                    shadeEvent: true
+                    // shadeClose: true,
+                    // shadeEvent: true,
+                    beforeClose (Close, data) {
+                        let s = new Date().getSeconds() % 5;
+                        this.$VMessage(s);
+                        if (s == 0) {
+                            this.$VMessage(data || 'data is null');
+                            Close();
+                        }
+                    },
+                    afterClose: (data) => {
+                        this.$VMessage(data || 'afterClose');
+                    }
                 });
             },
             openComp () {
@@ -165,6 +182,13 @@
                     moveAble: true,
                     shade: 0.5
                 });
+            },
+            CloseAll () {
+                this.$VWindow.closeAll();
+            },
+            ShowCount () {
+                let num = this.$VWindow.getInstances().length;
+                this.$VMessage(num);
             }
         }
     }
@@ -197,7 +221,8 @@
 | shade | 遮罩 | String/Number | - | 0 |
 | shadeClose | 点击遮罩是否关闭(仅在shadeEvent为true时生效) | boolean | - | - |
 | shadeEvent | 是否屏蔽鼠标事件 | boolean | - | false |
-| beforeClose | 关闭前的回调 | Function | - | false |
+| beforeClose | 关闭前的回调 | Function | - |  |
+| afterClose | 关闭后的回调 | Function | - |  |
 | elevation | 窗体悬浮高度 | number | - | 2 |
 
 
@@ -214,7 +239,7 @@
 | Minimize | 窗口最小化 | - |
 | Maximize | 窗口最大化、窗口正常化 | - |
 | Show | 显示窗口 | - |
-| Close | 关闭窗口 | Function(after: Function()) |
+| Close | 关闭窗口 | - |
 | SetTop | 设为顶级窗口 | - |
 
 

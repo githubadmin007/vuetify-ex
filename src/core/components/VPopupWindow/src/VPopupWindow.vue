@@ -104,6 +104,7 @@ export default class VPopupWindow extends Vue {
     @Prop({ default: false }) private shadeClose!: boolean; // 点击遮罩是否关闭(仅在shadeEvent为true时生效)
     @Prop({ default: false }) private shadeEvent!: boolean; // 是否屏蔽鼠标事件
     @Prop() private beforeClose!: Function; // 关闭前的回调
+    @Prop() private afterClose!: Function; // 关闭前的回调
     @Prop({ default: 2 }) private elevation!: number; // 窗体悬浮高度
 
     dWindowMoving = false; // 窗体是否在拖动中
@@ -313,16 +314,16 @@ export default class VPopupWindow extends Vue {
         this.$emit("input", true);
     }
     // 关闭窗口
-    Close(after?: Function) {
+    Close(event?: any, data?: any) {
         const close = () => {
             this.dShow = false;
             this.$emit("input", false);
-            if (typeof after === "function") {
-                after();
+            if (typeof this.afterClose === "function") {
+                this.afterClose(data);
             }
         };
         if (typeof this.beforeClose === "function") {
-            this.beforeClose(close);
+            this.beforeClose(close, data);
         } else {
             close();
         }
@@ -428,6 +429,24 @@ export default class VPopupWindow extends Vue {
     .popup-window-content {
         width: 100%;
         height: calc(100% - 40px);
+        overflow: auto;
+        &::-webkit-scrollbar {
+            /*滚动条整体样式*/
+            width: 10px; /*高宽分别对应横竖滚动条的尺寸*/
+            height: 1px;
+        }
+        &::-webkit-scrollbar-thumb {
+            /*滚动条里面小方块*/
+            border-radius: 10px;
+            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+            background: #a3a3a3;
+        }
+        &::-webkit-scrollbar-track {
+            /*滚动条里面轨道*/
+            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            background: #ededed;
+        }
         iframe {
             width: 100%;
             height: 100%;

@@ -11,10 +11,10 @@ function isVNode(node: string | VNode) {
 }
 
 function VMessageHelper(this: any, options: MessageOptions): string {
-    const _options: MessageOptions = typeof options === 'string' ? { message: options } : options;
+    const _options: MessageOptions = typeof options === 'string' || typeof options === 'number' ? { message: options } : options;
     const id = (typeof options === 'string' ? undefined : options.id) || 'message_' + seed++;
     _options.id = id;
-    const onClose =  _options.onClose;
+    const onClose = _options.onClose;
     _options.onClose = function () {
         VMessageHelper.close(id, onClose);
     };
