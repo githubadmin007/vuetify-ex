@@ -44,7 +44,7 @@
                                 : "mdi-window-maximize"
                         }}
                     </v-icon>
-                    <v-icon class="btn" v-if="closeAble" @click.stop="Close"
+                    <v-icon class="btn" v-if="closeAble" @click.stop="Close()"
                         >mdi-window-close</v-icon
                     >
                 </div>

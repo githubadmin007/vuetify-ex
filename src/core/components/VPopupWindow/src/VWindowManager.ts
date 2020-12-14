@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import PopupWindow from './VPopupWindow.vue';
-import { WindowOptions } from '@/types/VPopupWindow'
+import { WindowOptions } from '../../../../types/VPopupWindow'
 
 const instances: any[] = [];
 let seed = 1;

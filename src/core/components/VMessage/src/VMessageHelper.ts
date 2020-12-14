@@ -1,6 +1,6 @@
 import { VNode } from 'vue/types/umd';
 import VMessage from './VMessage.vue';
-import { MessageOptions } from '@/types/VMessage'
+import { MessageOptions } from '../../../../types/VMessage'
 
 
 const instances: any[] = [];
