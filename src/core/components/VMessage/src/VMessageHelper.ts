@@ -1,6 +1,6 @@
 import { VNode } from 'vue/types/umd';
 import VMessage from './VMessage.vue';
-import { MessageOptions } from '../../../../../types'
+import { MessageOptions } from '@/types/VMessage'
 
 
 const instances: any[] = [];
@@ -10,7 +10,7 @@ function isVNode(node: string | VNode) {
     return node !== null && typeof node === 'object' && Object.prototype.hasOwnProperty.call(node, 'componentOptions');
 }
 
-function VMessageHelper(this: any, options: MessageOptions): string {
+function VMessageHelper(this: any, options: MessageOptions | string): string {
     const _options: MessageOptions = typeof options === 'string' || typeof options === 'number' ? { message: options } : options;
     const id = (typeof options === 'string' ? undefined : options.id) || 'message_' + seed++;
     _options.id = id;
@@ -29,7 +29,7 @@ function VMessageHelper(this: any, options: MessageOptions): string {
     }
     instance.$mount();
     document.body.appendChild(instance.$el);
-    let verticalOffset = options.offset || 20;
+    let verticalOffset = _options.offset || 20;
     instances.forEach(item => {
         verticalOffset += item.$el.offsetHeight + 16;
     });
@@ -42,7 +42,7 @@ function VMessageHelper(this: any, options: MessageOptions): string {
 
 const keys = ['success', 'warning', 'info', 'error'];
 keys.forEach(type => {
-    (VMessageHelper as any)[type] = (options: MessageOptions) => {
+    (VMessageHelper as any)[type] = (options: MessageOptions | string) => {
         if (typeof options === 'string' || typeof options === 'number') {
             options = {
                 message: options
@@ -53,7 +53,7 @@ keys.forEach(type => {
     };
 });
 
-VMessageHelper.close = function (id: string, userOnClose: Function | undefined) {
+VMessageHelper.close = function (id: string, userOnClose?: Function): void {
     const len = instances.length;
     let index = -1;
     let removedHeight;

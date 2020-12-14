@@ -58,6 +58,7 @@
                 <slot>
                     <iframe v-if="src" :src="src"></iframe>
                     <component
+                        ref="COM"
                         v-else-if="component"
                         v-bind:is="component"
                         v-bind="componentProps"
@@ -100,6 +101,12 @@ export default class VPopupWindow extends Vue {
         },
     })
     private componentProps?: Record<string, any>; // 组件参数
+    @Prop({
+        default: () => {
+            /*空默认值*/
+        },
+    })
+    private componentEvents!: Record<string, Function>; // 组件事件
     @Prop({ type: [String, Number], default: 0 }) private shade: any; // 遮罩
     @Prop({ default: false }) private shadeClose!: boolean; // 点击遮罩是否关闭(仅在shadeEvent为true时生效)
     @Prop({ default: false }) private shadeEvent!: boolean; // 是否屏蔽鼠标事件
@@ -314,7 +321,7 @@ export default class VPopupWindow extends Vue {
         this.$emit("input", true);
     }
     // 关闭窗口
-    Close(event?: any, data?: any) {
+    Close(data?: any) {
         const close = () => {
             this.dShow = false;
             this.$emit("input", false);
@@ -360,6 +367,20 @@ export default class VPopupWindow extends Vue {
 
     mounted() {
         this.dIsMaximize = this.fullscreen;
+        // 动态绑定事件
+        if (this.component && this.componentEvents) {
+            const interval = setInterval(() => {
+                if (this.$refs.COM) {
+                    const comRef = this.$refs.COM as Vue;
+                    Object.keys(this.componentEvents).forEach((name) => {
+                        if (this.componentEvents[name]) {
+                            comRef.$on(name, this.componentEvents[name]);
+                        }
+                    });
+                    clearInterval(interval);
+                }
+            }, 100);
+        }
     }
 }
 </script>

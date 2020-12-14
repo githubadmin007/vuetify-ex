@@ -179,6 +179,11 @@
                     componentProps: {
                         msg: '传入一个组件及组件参数'
                     },
+                    componentEvents:{
+                        event1: (data) => { console.log(data) },
+                        event2: (data) => { console.log(data) },
+                        event3: (data) => { console.log(data) },
+                    },
                     moveAble: true,
                     shade: 0.5
                 });

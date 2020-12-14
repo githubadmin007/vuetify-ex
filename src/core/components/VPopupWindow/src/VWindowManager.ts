@@ -1,12 +1,12 @@
 import Vue from 'vue'
 import PopupWindow from './VPopupWindow.vue';
-import { WindowOptions } from '../../../../../types'
+import { WindowOptions } from '@/types/VPopupWindow'
 
 const instances: any[] = [];
 let seed = 1;
 
 /** 销毁实例 */
-function destroyInstance(id: string | void) {
+function destroyInstance(id?: string) {
     const index = id ? instances.findIndex(instance => instance.id === id) : instances.length - 1;
     if (index > -1) {
         const instance = instances[index];
@@ -47,7 +47,7 @@ function VWindowManager(this: Vue, options: WindowOptions | string): string {
 VWindowManager.zIndexBase = 1000;
 
 // 关闭指定窗口
-VWindowManager.close = function (id: string | void): void {
+VWindowManager.close = function (id?: string): void {
     const index = id ? instances.findIndex(instance => instance.id === id) : instances.length - 1;
     if (index > -1) {
         const instance = instances[index];
@@ -77,7 +77,7 @@ VWindowManager.getInstances = function (): any[] {
 }
 
 // 获取最顶的窗口
-VWindowManager.getTopWindow = function () {
+VWindowManager.getTopWindow = function (): PopupWindow | null {
     if (instances.length > 0) {
         return instances[instances.length - 1];
     }
@@ -85,7 +85,7 @@ VWindowManager.getTopWindow = function () {
 }
 
 // 获取窗口实例
-VWindowManager.getWindow = function (id: string) {
+VWindowManager.getWindow = function (id: string): PopupWindow | null {
     return instances.find(instance => instance.id === id);
 }
 

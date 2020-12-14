@@ -1,12 +1,12 @@
 {
   "name": "vuetify-ex",
   "descroption": "一个依赖于Vuetify的前端Vue组件库，作为对Vuetify组件库的补充。",
-  "version": "0.4.1",
+  "version": "0.4.5",
   "author": "fssg/zjh",
   "license": "MIT",
   "private": false,
   "main": "./lib/VuetifyEx.umd.js",
-  "types": "./types/index.d.ts",
+  "types": "./src/types/index.d.ts",
   "files": [
     "src/",
     "lib/",
